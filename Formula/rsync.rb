@@ -45,7 +45,6 @@ class Rsync < Formula
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
       "--enable-acl-support",
       "--enable-xattr-support",
-      "--enable-iconv",
       "--enable-ipv6",
       "--enable-debug",
       "--with-included-popt",
