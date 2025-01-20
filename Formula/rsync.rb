@@ -51,10 +51,10 @@ class Rsync < Formula
       "--with-included-popt",
       "--with-included-zlib",
       "--enable-fileflags",
-      "--enable-crtimes"
+      "--enable-crtimes",
+      "--with-lz4"
     ]
 
-    args << "--with-lz4=#{Formula["lz4"].opt_prefix}"
     args << "--with-zstd=#{Formula["zstd"].opt_prefix}"
     args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
     args << "--with-xz=#{Formula["xz"].opt_prefix}"
