@@ -33,12 +33,6 @@ class Rsync < Formula
 
     ENV["CC"] = Formula["gcc"].opt_bin/"gcc-14"
     ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
-#   ENV["PKG_CONFIG"] = Formula["pkgconfig"].opt_bin/"pkgconfig"
-    ENV["PKG_CONFIG_PATH"] = "/opt/homebrew/lib/pkgconfig"
-    ENV["CFLAGS"] = "-I /opt/homebrew/include"
-    ENV["LDFLAGS"] = "-L /opt/homebrew/lib"
-
-   # Formula["pkgconfig"].opt_lib/"pkgconfig"
 
     args = [
       "--prefix=#{prefix}",
