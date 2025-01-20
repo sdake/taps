@@ -28,6 +28,7 @@ class Rsync < Formula
 #  depends_on "libacl"
 #  uses_from_macos "zlib"
 
+
   def install
     ENV["CC"] = Formula["gcc"].opt_bin/"gcc-14"
     ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
@@ -45,6 +46,7 @@ class Rsync < Formula
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
     ]
 
+    system "env"
     system "bash configure.sh", *args, "--verbose" || (raise "Configure failed. Check config.log.")
 
     system "make"
