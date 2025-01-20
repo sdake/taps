@@ -42,7 +42,7 @@ class Rsync < Formula
      "--with-lz4=#{Formula["lz4"].opt_prefix}",
      "--with-zstd=#{Formula["zstd"].opt_prefix}",
      "--with-bzip2=#{Formula["bzip2"].opt_prefix}",
-     "--with-xz=#{Formula["xz"].opt_prefix}"
+     "--with-xz=#{Formula["xz"].opt_prefix}",
      "--with-wolfssl=#{Formula["wolfssl"].opt_prefix}"
    ]
 
