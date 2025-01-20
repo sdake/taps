@@ -51,9 +51,9 @@ class Rsync < Formula
       "--with-xz"
     ]
 
-    args << "--with-zstd=#{Formula["zstd"].opt_prefix}"
-    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
-    args << "--with-xz=#{Formula["xz"].opt_prefix}"
+    args << "--with-zstd=#{Formula["zstd"].opt_prefix}/lib"
+    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}/lib"
+    args << "--with-xz=#{Formula["xz"].opt_prefix}/lib"
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
