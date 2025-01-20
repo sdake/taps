@@ -23,28 +23,36 @@ class Rsync < Formula
   depends_on "zlib"
   depends_on "zstd"
   depends_on "bzip2"
+  depends_on "gettext"
+  depends_on "gcc"
 
+#  depends_on "libacl"
 #  uses_from_macos "zlib"
 
-   def install
-   args = [
-     "--prefix=#{prefix}",
-     "--with-rsyncd-conf=#{etc}/rsyncd.conf",
-     "--enable-acl-support",
-     "--enable-xattr-support",
-     "--enable-iconv",
-     "--enable-ipv6",
-     "--enable-debug",
-     "--enable-fileflags",
-     "--enable-crtimes",
-     "--with-included-popt=no",
-     "--with-included-zlib=no",
-     "--with-lz4=#{Formula["lz4"].opt_prefix}",
-     "--with-zstd=#{Formula["zstd"].opt_prefix}",
-     "--with-bzip2=#{Formula["bzip2"].opt_prefix}",
-     "--with-xz=#{Formula["xz"].opt_prefix}",
-     "--with-wolfssl=#{Formula["wolfssl"].opt_prefix}"
-   ]
+  def install
+    ENV["CC"] = Formula["gcc"].opt_bin/"gcc-11"
+    ENV["CXX"] = Formula["gcc"].opt_bin/"g++-11"
+    ENV["LD"] = Formula["gcc"].opt_bin/"gcc-11"
+    ENV["AR"] = "/home/linuxbrew/.linuxbrew/bin/ar"
+    ENV["RANLIB"] = "/home/linuxbrew/.linuxbrew/bin/ranlib"
+    args = [
+      "--prefix=#{prefix}",
+      "--with-rsyncd-conf=#{etc}/rsyncd.conf",
+      "--enable-acl-support",
+      "--enable-xattr-support",
+      "--enable-iconv",
+      "--enable-ipv6",
+      "--enable-debug",
+      "--enable-fileflags",
+      "--enable-crtimes",
+      "--with-included-popt",
+      "--with-included-zlib",
+      "--with-lz4=#{Formula["lz4"].opt_prefix}",
+      "--with-zstd=#{Formula["zstd"].opt_prefix}",
+      "--with-bzip2=#{Formula["bzip2"].opt_prefix}",
+      "--with-xz=#{Formula["xz"].opt_prefix}",
+      "--with-wolfssl=#{Formula["wolfssl"].opt_prefix}"
+    ]
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
@@ -67,5 +75,3 @@ class Rsync < Formula
     end
   end
 end
-
-
