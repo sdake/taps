@@ -14,7 +14,7 @@ class Rsync < Formula
   depends_on "gcc" => :build
 
   depends_on "gettext"
-  depends_on "libiconv" if OS.mac?
+#  depends_on "libiconv" if OS.mac?
 
   depends_on "lz4"
   depends_on "popt"
@@ -52,10 +52,6 @@ class Rsync < Formula
       "--with-bzip2",
       "--with-xz"
     ]
-
-    args << "--with-zstd=#{Formula["zstd"].opt_prefix}/lib"
-    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}/lib"
-    args << "--with-xz=#{Formula["xz"].opt_prefix}/lib"
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
