@@ -32,15 +32,15 @@ class Rsync < Formula
 
     ENV["CC"] = Formula["gcc"].opt_bin/"gcc-14"
     ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
-    ENV["CFLAGS"] = "-I /opt/homebrew/include"
-    ENV["LDFLAGS"] = "-L /opt/homebrew/lib"
+    ENV["CFLAGS"] = "-I#{HOMEBREW_PREFIX}/include"
+    ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/lib"
 
     args = [
       "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
     ]
 
-    system "./configure", *args || (raise "Configure failed. Check config.log.")
+    system "./configure", *args, "--verbose" || (raise "Configure failed. Check config.log.")
 
     system "make"
     system "make", "install"
