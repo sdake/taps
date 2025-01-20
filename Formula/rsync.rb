@@ -9,6 +9,8 @@ class Rsync < Formula
 
   depends_on "autoconf" => :build
   depends_on "automake" => :build
+  depends_on "libtool" => :build
+
 
   depends_on "gettext"
   depends_on "libiconv" if OS.mac?
@@ -22,32 +24,30 @@ class Rsync < Formula
   depends_on "zstd"
   depends_on "bzip2"
 
-  uses_from_macos "zlib"
+#  uses_from_macos "zlib"
 
    def install
-    args = [
-      "--prefix=#{prefix}",
-      "--with-rsyncd-conf=#{etc}/rsyncd.conf",
-      "--with-included-popt=no",
-      "--with-included-zlib=no",
-      "--enable-acl-support",
-      "--enable-xattr-support",
-      "--enable-fileflags",
-      "--enable-crtimes",
-      "--enable-iconv",
-      "--enable-ipv6",
-      "--enable-debug",
-      "--with-included-popt",
-      "--with-included-zlib",
-      "--with-wolfssl"
-    ]
+   args = [
+     "--prefix=#{prefix}",
+     "--with-rsyncd-conf=#{etc}/rsyncd.conf",
+     "--enable-acl-support",
+     "--enable-xattr-support",
+     "--enable-iconv",
+     "--enable-ipv6",
+     "--enable-debug",
+     "--enable-fileflags",
+     "--enable-crtimes",
+     "--with-included-popt=no",
+     "--with-included-zlib=no",
+     "--with-lz4=#{Formula["lz4"].opt_prefix}",
+     "--with-zstd=#{Formula["zstd"].opt_prefix}",
+     "--with-bzip2=#{Formula["bzip2"].opt_prefix}",
+     "--with-xz=#{Formula["xz"].opt_prefix}"
+     "--with-wolfssl=#{Formula["wolfssl"].opt_prefix}"
+   ]
 
-    args << "--with-lz4=#{Formula["lz4"].opt_prefix}"
-    args << "--with-zstd=#{Formula["zstd"].opt_prefix}"
-    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
-    args << "--with-xz=#{Formula["xz"].opt_prefix}"
+    system "./configure", *args || (raise "Configure failed. Check config.log.")
 
-    system "./configure", *args, *std_configure_args
     system "make"
     system "make", "install"
   end
@@ -67,3 +67,5 @@ class Rsync < Formula
     end
   end
 end
+
+
