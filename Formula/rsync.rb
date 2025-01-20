@@ -45,7 +45,7 @@ class Rsync < Formula
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
     ]
 
-    system "./configure", *args, "--verbose" || (raise "Configure failed. Check config.log.")
+    system "bash configure.sh", *args, "--verbose" || (raise "Configure failed. Check config.log.")
 
     system "make"
     system "make", "install"
