@@ -27,7 +27,6 @@ class Rsync < Formula
 
    def install
     args = %W[
-      "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
       "--with-included-popt=no",
       "--with-included-zlib=no",
