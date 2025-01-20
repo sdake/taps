@@ -43,6 +43,7 @@ class Rsync < Formula
     args = [
       "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
+      "--disable-iconv",
       "--enable-acl-support",
       "--enable-xattr-support",
       "--enable-ipv6",
