@@ -30,11 +30,12 @@ class Rsync < Formula
 #  uses_from_macos "zlib"
 
   def install
-    ENV["CC"] = Formula["gcc"].opt_bin/"gcc-11"
-    ENV["CXX"] = Formula["gcc"].opt_bin/"g++-11"
-    ENV["LD"] = Formula["gcc"].opt_bin/"gcc-11"
-    ENV["AR"] = "/home/linuxbrew/.linuxbrew/bin/ar"
-    ENV["RANLIB"] = "/home/linuxbrew/.linuxbrew/bin/ranlib"
+    ENV["CC"] = Formula["gcc"].opt_bin/"gcc-14"
+    ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
+    ENV["LD"] = Formula["gcc"].opt_bin/"gcc-14"
+    ENV["AR"] = Formula["gcc"].opt_bin/"ar"
+    ENV["RANLIB"] = Formula["gcc"].opt_bin/"ranlib"
+
     args = [
       "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
