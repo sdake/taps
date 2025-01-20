@@ -11,7 +11,7 @@ class Rsync < Formula
   depends_on "automake" => :build
   depends_on "libtool" => :build
   depends_on "pkg-config" => :build
-
+  depends_on "gcc" => :build
 
   depends_on "gettext"
   depends_on "libiconv" if OS.mac?
@@ -25,7 +25,6 @@ class Rsync < Formula
   depends_on "zstd"
   depends_on "bzip2"
   depends_on "gettext"
-  depends_on "gcc"
 
 #  depends_on "libacl"
 #  uses_from_macos "zlib"
@@ -36,10 +35,12 @@ class Rsync < Formula
     ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
 #   ENV["PKG_CONFIG"] = Formula["pkgconfig"].opt_bin/"pkgconfig"
     ENV["PKG_CONFIG_PATH"] = "/opt/homebrew/lib/pkgconfig"
+    ENV["CFLAGS"] = "-I /opt/homebrew/include"
+    ENV["LDFLAGS"] = "-L /opt/homebrew/lib"
+
    # Formula["pkgconfig"].opt_lib/"pkgconfig"
 
     args = [
-      "--with-pkg-config",
       "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
       "--enable-acl-support",
@@ -52,6 +53,11 @@ class Rsync < Formula
       "--enable-fileflags",
       "--enable-crtimes"
     ]
+
+    args << "--with-lz4=#{Formula["lz4"].opt_prefix}"
+    args << "--with-zstd=#{Formula["zstd"].opt_prefix}"
+    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
+    args << "--with-xz=#{Formula["xz"].opt_prefix}"
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
