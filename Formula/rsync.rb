@@ -10,6 +10,7 @@ class Rsync < Formula
   depends_on "autoconf" => :build
   depends_on "automake" => :build
   depends_on "libtool" => :build
+    depends_on "pkg-config" => :build
 
 
   depends_on "gettext"
@@ -30,11 +31,10 @@ class Rsync < Formula
 #  uses_from_macos "zlib"
 
   def install
+
     ENV["CC"] = Formula["gcc"].opt_bin/"gcc-14"
     ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
-    ENV["LD"] = Formula["gcc"].opt_bin/"gcc-14"
-    ENV["AR"] = Formula["gcc"].opt_bin/"ar"
-    ENV["RANLIB"] = Formula["gcc"].opt_bin/"ranlib"
+    ENV["PKG_CONFIG"] = Formula["pkg-config"].opt_bin/"pkg-config"
 
     args = [
       "--prefix=#{prefix}",
@@ -44,19 +44,11 @@ class Rsync < Formula
       "--enable-iconv",
       "--enable-ipv6",
       "--enable-debug",
-      "--enable-fileflags",
-      "--enable-crtimes",
       "--with-included-popt",
       "--with-included-zlib",
-      "--with-lz4"
+      "--enable-fileflags",
+      "--enable-crtimes"
     ]
-
-    args << "--with-lz4=#{Formula["lz4"].opt_prefix}"
-    args << "--with-zstd=#{Formula["zstd"].opt_prefix}"
-    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
-    args << "--with-xz=#{Formula["xz"].opt_prefix}"
-    args << "--with-wolfssl=#{Formula["wolfssl"].opt_prefix}"
-    args << "--with-xxhash=#{Formula["xxhash"].opt_prefix}"
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
