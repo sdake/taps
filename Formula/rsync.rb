@@ -52,12 +52,11 @@ class Rsync < Formula
       "--with-included-zlib",
       "--enable-fileflags",
       "--enable-crtimes",
-      "--with-lz4"
+      "--with-lz4",
+      "--with-zstd",
+      "--with-bzip2",
+      "--with-xz"
     ]
-
-    args << "--with-zstd=#{Formula["zstd"].opt_prefix}"
-    args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
-    args << "--with-xz=#{Formula["xz"].opt_prefix}"
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
