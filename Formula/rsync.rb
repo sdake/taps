@@ -37,6 +37,7 @@ class Rsync < Formula
     ENV["HOMEBREW_CXX"] = Formula["gcc"].opt_bin/"g++-14"
 
     ENV["CFLAGS"] = "-I#{HOMEBREW_PREFIX}/opt/glibc/include -I#{HOMEBREW_PREFIX}/include"
+    ENV["CPPFLAGS"] = "-I#{HOMEBREW_PREFIX}/opt/glibc/include -I#{HOMEBREW_PREFIX}/include"
     ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/opt/glibc/lib -L#{HOMEBREW_PREFIX}/lib"
 
     args = [
