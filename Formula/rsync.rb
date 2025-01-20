@@ -35,6 +35,7 @@ class Rsync < Formula
     ENV["CC"] = Formula["gcc"].opt_bin/"gcc-14"
     ENV["CXX"] = Formula["gcc"].opt_bin/"g++-14"
     ENV["PKG_CONFIG"] = Formula["pkg-config"].opt_bin/"pkg-config"
+    ENV['PKG_CONFIG_PATH"] = "/opt/homebrew/lib/pkgconfig/"
 
     args = [
       "--with-pkg-config",
