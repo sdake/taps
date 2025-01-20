@@ -26,7 +26,8 @@ class Rsync < Formula
   uses_from_macos "zlib"
 
    def install
-    args = %W[
+    args = [
+      "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
       "--with-included-popt=no",
       "--with-included-zlib=no",
