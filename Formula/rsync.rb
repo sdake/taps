@@ -48,6 +48,7 @@ class Rsync < Formula
       "--enable-crtimes",
       "--with-included-popt",
       "--with-included-zlib",
+      "--with-lz4"
     ]
 
     args << "--with-lz4=#{Formula["lz4"].opt_prefix}"
@@ -55,6 +56,7 @@ class Rsync < Formula
     args << "--with-bzip2=#{Formula["bzip2"].opt_prefix}"
     args << "--with-xz=#{Formula["xz"].opt_prefix}"
     args << "--with-wolfssl=#{Formula["wolfssl"].opt_prefix}"
+    args << "--with-xxhash=#{Formula["xxhash"].opt_prefix}"
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
 
