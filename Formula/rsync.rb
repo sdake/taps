@@ -17,7 +17,6 @@ class Rsync < Formula
   depends_on "libiconv" if OS.mac?
 
   depends_on "lz4"
-  depends_on "wolfssl"
   depends_on "popt"
   depends_on "xxhash"
   depends_on "xz"
