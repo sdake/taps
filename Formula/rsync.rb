@@ -37,6 +37,7 @@ class Rsync < Formula
     ENV["PKG_CONFIG"] = Formula["pkg-config"].opt_bin/"pkg-config"
 
     args = [
+      "--with-pkg-config",
       "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
       "--enable-acl-support",
