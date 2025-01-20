@@ -38,19 +38,6 @@ class Rsync < Formula
     args = [
       "--prefix=#{prefix}",
       "--with-rsyncd-conf=#{etc}/rsyncd.conf",
-      "--disable-iconv",
-      "--enable-acl-support",
-      "--enable-xattr-support",
-      "--enable-ipv6",
-      "--enable-debug",
-      "--with-included-popt",
-      "--with-included-zlib",
-      "--enable-fileflags",
-      "--enable-crtimes",
-      "--with-lz4",
-      "--with-zstd",
-      "--with-bzip2",
-      "--with-xz"
     ]
 
     system "./configure", *args || (raise "Configure failed. Check config.log.")
