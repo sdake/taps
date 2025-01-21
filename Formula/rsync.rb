@@ -29,8 +29,8 @@ class Rsync < Formula
 #    ENV["CFLAGS"] = "-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
 
     args = %W[
-      --includedir="/home/linuxbrew/.linuxbrew/opt/glibc/include"
-      --libdir="/home/linuxbrew/.linuxbrew/opt/glibc/lib"
+      --includedir="/volume1/linuxbrew/.linuxbrew/opt/glibc/include"
+      --libdir="/volume1/linuxbrew/.linuxbrew/opt/glibc/lib"
       --prefix=#{prefix}
       --disable-debug
       --disable-profile
