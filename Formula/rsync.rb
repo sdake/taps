@@ -55,7 +55,7 @@ class Rsync < Formula
       --with-included-zlib=no
     ]
 
-    system "./configure", *args, *std_configure_args
+    system "./configure", *args
     system "make"
     system "make", "install"
   end
