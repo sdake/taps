@@ -1,3 +1,4 @@
+
 class Rsync < Formula
   desc "Utility that provides fast incremental file transfer"
   homepage "https://rsync.samba.org/"
@@ -36,24 +37,26 @@ class Rsync < Formula
       --disable-debug
       --disable-profile
       --with-rsyncd-conf=#{etc}/rsyncd.conf
-	  --enable-profile
-	  --enable-roll-simd
-	  --enable-largefile
+      --enable-profile
+      --enable-largefile
       --enable-ipv6
-	  --enable-locale
-	  --enable-openssl
-	  --disable-md5-asm
-	  --disable-roll-asm
-	  --enable-xxhash
-	  --enable-zstd
-	  --enable-lz4
+      --enable-locale
+      --enable-openssl
+      --disable-md5-asm
+      --disable-roll-asm
+      --enable-xxhash
+      --enable-zstd
+      --enable-lz4
       --enable-iconv
       --enable-iconv-open
-	  --enable-acl-support
-	  --enable-xattr-support
-
+      --enable-acl-support
+      --enable-xattr-support
       --with-included-zlib=no
     ]
+
+    if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
+      args << "--enable-roll-simd"
+    end
 
     system "./configure", *args
     system "make"
