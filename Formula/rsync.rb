@@ -24,12 +24,13 @@ class Rsync < Formula
   uses_from_macos "zlib"
 
   def install
-    ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/opt/glibc/lib -L#{HOMEBREW_PREFIX}/lib"
+#    ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/opt/glibc/lib -L#{HOMEBREW_PREFIX}/lib"
 #    ENV["CPPFLAGS"] = "-I#{HOMEBREW_PREFIX}/opt/glibc/include -I#{HOMEBREW_PREFIX}/include"
-    ENV["CFLAGS"] = "-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
-    ENV["CPPFLAGS"] = "-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
+#    ENV["CFLAGS"] = "-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
 
     args = %W[
+      --includedir="/home/linuxbrew/.linuxbrew/opt/glibc/include"
+      --libdir="/home/linuxbrew/.linuxbrew/opt/glibc/lib"
       --prefix=#{prefix}
       --disable-debug
       --disable-profile
