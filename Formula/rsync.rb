@@ -34,6 +34,7 @@ class Rsync < Formula
 
   def install
     args = %W[
+      --prefix=#{prefix}
       --disable-debug
       --disable-profile
       --with-rsyncd-conf=#{etc}/rsyncd.conf
