@@ -49,9 +49,9 @@ class Rsync < Formula
       --with-included-zlib=no
     ]
 
-    if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-      args << "--enable-roll-simd"
-    end
+#    if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
+#      args << "--enable-roll-simd"
+#    end
 
     system "./configure", *args
     system "make"
