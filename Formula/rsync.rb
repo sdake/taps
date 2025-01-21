@@ -33,10 +33,26 @@ class Rsync < Formula
 
   def install
     args = %W[
+      --disable-debug
+      --disable-profile
       --with-rsyncd-conf=#{etc}/rsyncd.conf
-      --with-included-popt=no
-      --with-included-zlib=no
+	  --enable-profile
+	  --enable-roll-simd
+	  --enable-largefile
       --enable-ipv6
+	  --enable-locale
+	  --enable-openssl
+	  --disable-md5-asm
+	  --disable-roll-asm
+	  --enable-xxhash
+	  --enable-zstd
+	  --enable-lz4
+      --enable-iconv
+      --enable-iconv-open
+	  --enable-acl-support
+	  --enable-xattr-support
+
+      --with-included-zlib=no
     ]
 
     system "./configure", *args, *std_configure_args
