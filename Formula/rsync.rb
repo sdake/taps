@@ -23,15 +23,6 @@ class Rsync < Formula
 
   uses_from_macos "zlib"
 
-  # hfs-compression.diff has been marked by upstream as broken since 3.1.3
-  # and has not been reported fixed as of 3.2.7
-  patch do
-    url "https://download.samba.org/pub/rsync/src/rsync-patches-3.4.1.tar.gz"
-    mirror "https://www.mirrorservice.org/sites/rsync.samba.org/rsync-patches-3.4.1.tar.gz"
-    sha256 "f56566e74cfa0f68337f7957d8681929f9ac4c55d3fb92aec0d743db590c9a88"
-    apply "patches/fileflags.diff"
-  end
-
   def install
     args = %W[
       --prefix=#{prefix}
