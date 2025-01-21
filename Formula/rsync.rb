@@ -24,6 +24,9 @@ class Rsync < Formula
   uses_from_macos "zlib"
 
   def install
+    ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/opt/glibc/lib -L#{HOMEBREW_PREFIX}/lib"
+    ENV["CPPFLAGS"] = "-I#{HOMEBREW_PREFIX}/opt/glibc/include -I#{HOMEBREW_PREFIX}/include"
+
     args = %W[
       --prefix=#{prefix}
       --disable-debug
