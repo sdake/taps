@@ -58,7 +58,8 @@ class Rsync < Formula
 #      args << "--enable-roll-simd"
 #    end
 
-    system "./configure", *args
+    system "sh -x ./configure", *args, "> /tmp/my-configure-ouptut.txt 2>&1"
+
     system "make"
     system "make", "install"
   end
