@@ -27,6 +27,8 @@ class Rsync < Formula
 #    ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/opt/glibc/lib -L#{HOMEBREW_PREFIX}/lib"
 #    ENV["CPPFLAGS"] = "-I#{HOMEBREW_PREFIX}/opt/glibc/include -I#{HOMEBREW_PREFIX}/include"
 #    ENV["CFLAGS"] = "-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
+    #
+    ENV["LD_LIBRARY_PATH"] = "#{HOMEBREW_PREFIX}/opt/glibc/lib"
 
     args = %W[
       --includedir=#{Formula["glibc"].include}
