@@ -1,4 +1,3 @@
-
 class Rsync < Formula
   desc "Utility that provides fast incremental file transfer"
   homepage "https://rsync.samba.org/"
@@ -23,43 +22,24 @@ class Rsync < Formula
 
   uses_from_macos "zlib"
 
-  def install
-#    ENV["LDFLAGS"] = "-L#{HOMEBREW_PREFIX}/opt/glibc/lib -L#{HOMEBREW_PREFIX}/lib"
-#    ENV["CPPFLAGS"] = "-I#{HOMEBREW_PREFIX}/opt/glibc/include -I#{HOMEBREW_PREFIX}/include"
-#    ENV["CFLAGS"] = "-I/home/linuxbrew/.linuxbrew/opt/glibc/include"
-    #
-    ENV["LD_LIBRARY_PATH"] = "#{HOMEBREW_PREFIX}/opt/glibc/lib"
+  # hfs-compression.diff has been marked by upstream as broken since 3.1.3
+  # and has not been reported fixed as of 3.2.7
+  patch do
+    url "https://download.samba.org/pub/rsync/src/rsync-patches-3.4.1.tar.gz"
+    mirror "https://www.mirrorservice.org/sites/rsync.samba.org/rsync-patches-3.4.1.tar.gz"
+    sha256 "f56566e74cfa0f68337f7957d8681929f9ac4c55d3fb92aec0d743db590c9a88"
+    apply "patches/fileflags.diff"
+  end
 
+  def install
     args = %W[
-      --includedir=#{Formula["glibc"].include}
-      --libdir=#{Formula["glibc"].lib}
-      --prefix=#{prefix}
-      --disable-debug
-      --disable-profile
       --with-rsyncd-conf=#{etc}/rsyncd.conf
-      --enable-profile
-      --enable-largefile
-      --enable-ipv6
-      --enable-locale
-      --enable-openssl
-      --disable-md5-asm
-      --disable-roll-asm
-      --enable-xxhash
-      --enable-zstd
-      --enable-lz4
-      --enable-iconv
-      --enable-iconv-open
-      --enable-acl-support
-      --enable-xattr-support
+      --with-included-popt=no
       --with-included-zlib=no
+      --enable-ipv6
     ]
 
-#    if Hardware::CPU.intel? && Hardware::CPU.is_64_bit?
-#      args << "--enable-roll-simd"
-#    end
-
-    system "sh -x ./configure", *args, "> /tmp/my-configure-ouptut.txt 2>&1"
-
+    system "./configure", *args, *std_configure_args
     system "make"
     system "make", "install"
   end
